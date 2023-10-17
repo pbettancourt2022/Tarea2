@@ -3,20 +3,24 @@ package org.example;
 class Expendedor {
     private final Deposito coca;
     private final Deposito sprite;
+    private final Deposito fanta;
     private final DepositoM monVu;
     public static final int COCA = 1;
     public static final int SPRITE = 2;
+    public static final int FANTA =3;
 
     private static int precio;
 
     public Expendedor(int numBebidas, int precioBebidas) {
         coca = new Deposito();
         sprite = new Deposito();
+        fanta = new Deposito();
         monVu = new DepositoM();
         precio = precioBebidas;
         for (int i = 0; i < numBebidas; i++) {
             coca.addBebida(new CocaCola(i + 100));
             sprite.addBebida(new Sprite(i + 200));
+            fanta.addBebida(new Fanta(i+300));
         }
 
     }
@@ -58,10 +62,7 @@ class Expendedor {
 
                 }
             } else {
-                while (valorMoneda != 0) {
-                    monVu.addMoneda(new Moneda100());
-                    valorMoneda = valorMoneda - 100;
-                }
+                new NoHayProductoException(m, monVu);
                 return null;
             }
         } else if (m.getValor() < precio) {
