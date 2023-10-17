@@ -25,9 +25,7 @@ class Expendedor {
         Bebida bebida = null;
 
         if (m == null) {
-            if (bebida==null){
-                return NoHayProductoException(Moneda m);
-            }
+            new PagoIncorrectoException(m,monVu);
             return bebida;
         } else if (m.getValor() > precio) {
             int valorMoneda = m.getValor();
@@ -35,11 +33,7 @@ class Expendedor {
             if (cual == COCA) {
                 bebida = coca.getBebida();
                 if (bebida == null) {
-                    while (valorMoneda != 0) {
-                        monVu.addMoneda(new Moneda100());
-                        valorMoneda = valorMoneda - 100;
-                    }
-                    return bebida;
+                    new NoHayProductoException(m, monVu);
                 } else {
                     while (valorVuelto != 0) {
                         monVu.addMoneda(new Moneda100());
@@ -71,11 +65,7 @@ class Expendedor {
                 return null;
             }
         } else if (m.getValor() < precio) {
-            int valorMoneda = m.getValor();
-            while (valorMoneda != 0) {
-                monVu.addMoneda(new Moneda100());
-                valorMoneda = valorMoneda - 100;
-            }
+            new PagoInsuficienteException(m, monVu);
             return null;
         } else if (m.getValor() == precio) {
             int valorMoneda = m.getValor();

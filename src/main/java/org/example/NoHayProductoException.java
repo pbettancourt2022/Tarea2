@@ -1,5 +1,8 @@
 package org.example;
-class NoHayProductoException(Moneda m) {
-    
+class NoHayProductoException {
+    public NoHayProductoException(Moneda m, DepositoM monVu) {
+        monVu.addMoneda(m);
     }
+}
+
 
