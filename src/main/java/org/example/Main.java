@@ -3,7 +3,7 @@ package org.example;
 public class Main {
     public static void main(String[] args) {
         // Expendedor 1, se prueba que la compra sea exitosa en todos los productos, además se prueba qué ocurre cuando no hay productos.
-        Expendedor exp = new Expendedor(2, 500);
+        Expendedor exp = new Expendedor(2);
         Moneda m = null;
         Comprador c = null;
 
