@@ -1,10 +1,7 @@
 package org.example;
-
-abstract class Moneda {
-
-    public Moneda() {
-
-    }
+import java.lang.Comparable;
+abstract class Moneda implements Comparable<Moneda>{
+    public Moneda() {}
 
     public Moneda getSerie() {
         return this;
@@ -15,6 +12,9 @@ abstract class Moneda {
         return "Moneda{" +
                 "serie = " + this +
                 "valor = " + null + '}';
+    }
+    public int compareTo(Moneda o) {
+        return Integer.compare(this.getValor(), o.getValor());
     }
 }
 
