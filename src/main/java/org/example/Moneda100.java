@@ -12,6 +12,6 @@ class Moneda100 extends Moneda {
     public String toString(){
         return "Moneda{" +
                 "serie = " + this +
-                "valor = 100";
+                "valor = 100}";
     }
 }

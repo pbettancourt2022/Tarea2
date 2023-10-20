@@ -14,7 +14,7 @@ abstract class Moneda {
     public String toString(){
         return "Moneda{" +
                 "serie = " + this +
-                "valor = " + null;
+                "valor = " + null + '}';
     }
 }
 

@@ -7,19 +7,11 @@ class Expendedor {
     private Deposito snickers;
     private Deposito super8;
     private Deposito monVu;
-    public static final int COCA = 1;
-    public static final int SPRITE = 2;
-    public static final int FANTA =3;
-    public static final int SNICKERS = 4;
-    public static final int SUPER8 = 5;
-
-    private static int precio;
-
-    public Expendedor(int numProductos, int precioProductos) {
+    private static int precio; //
+    public Expendedor(int numProductos) {
         coca = new Deposito(); sprite = new Deposito();
         fanta = new Deposito(); snickers = new Deposito();
         super8 = new Deposito(); monVu = new Deposito();
-        precio = precioProductos;
         for (int i = 0; i < numProductos; i++) {
             coca.addElemento(new CocaCola(i + 100));
             sprite.addElemento(new Sprite(i + 200));
@@ -31,108 +23,53 @@ class Expendedor {
     }
 
     public Producto comprarProducto(Moneda m, int cual)throws PagoIncorrectoException, NoHayProductoException, PagoInsuficienteException  {
-        Producto producto= null;
+        Producto producto = null;
+        Deposito temp = null;
+        int precio = 0;
+
+        if (cual == Productos.COCACOLA.getNumero()) {
+            temp = coca;
+            precio = Productos.COCACOLA.getPrecio();
+        } else if (cual == Productos.SPRITE.getNumero()) {
+            temp = sprite;
+            precio = Productos.SPRITE.getPrecio();
+        } else if (cual == Productos.FANTA.getNumero()) {
+            temp = fanta;
+            precio = Productos.FANTA.getPrecio();
+        } else if (cual == Productos.SNICKERS.getNumero()) {
+            temp = snickers;
+            precio = Productos.SNICKERS.getPrecio();
+        } else if (cual == Productos.SUPER8.getNumero()) {
+            temp = super8;
+            precio = Productos.SUPER8.getPrecio();
+        }
 
         if (m == null) {
-            throw new PagoIncorrectoException(m,monVu);
+            throw new PagoIncorrectoException(m, monVu); // la idea es poner el exception funcional aqui
         } else if (m.getValor() > precio) {
             int valorMoneda = m.getValor();
             int valorVuelto = m.getValor() - precio;
-            if (cual == COCA) {
-                producto = (Producto) coca.getElemento();
-                if (producto == null) {
-                    throw new NoHayProductoException(m, monVu);
-
-                } else {
-                    while (valorVuelto != 0) {
-                        monVu.addElemento(new Moneda100());
-                        valorVuelto = valorVuelto - 100;
-                    }
-                    return producto;
-                }
-            } else if (cual == SPRITE) {
-                producto = (Producto) sprite.getElemento();
-                if (producto == null) {
-                    throw new NoHayProductoException(m, monVu);
-                } else {
-                    while (valorVuelto != 0) {
-                        monVu.addElemento(new Moneda100());
-                        valorVuelto = valorVuelto - 100;
-                    }
-                    return producto;
-                }
-            } else if (cual == FANTA) {
-                producto = (Producto) fanta.getElemento();
-                if (producto == null) {
-                    throw new NoHayProductoException(m, monVu);
-                } else {
-                    while (valorVuelto != 0) {
-                        monVu.addElemento(new Moneda100());
-                        valorVuelto = valorVuelto - 100;
-                    }
-                    return producto;
-                }
-            }else if (cual == SNICKERS) {
-                producto = (Producto) snickers.getElemento();
-                if (producto == null) {
-                    throw new NoHayProductoException(m, monVu);
-                } else {
-                    while (valorVuelto != 0) {
-                        monVu.addElemento(new Moneda100());
-                        valorVuelto = valorVuelto - 100;
-                    }
-                    return producto;
-                }
-            } else if (cual == SUPER8) {
-                producto = (Producto) super8.getElemento();
-                if (producto == null) {
-                    throw new NoHayProductoException(m, monVu);
-                } else {
-                    while (valorVuelto != 0) {
-                        monVu.addElemento(new Moneda100());
-                        valorVuelto = valorVuelto - 100;
-                    }
-                    return producto;
-                }
-            }
-            else {
+            producto = (Producto) temp.getElemento();
+            if (producto == null) { // se deberia agregar en este punto la excepcion de que no hay producto
                 throw new NoHayProductoException(m, monVu);
+            } else {
+                while (valorVuelto != 0) {
+                    monVu.addElemento(new Moneda100());
+                    valorVuelto -= 100;
+                }
             }
         } else if (m.getValor() < precio) {
-            throw new PagoInsuficienteException(m, monVu);
+            throw new PagoInsuficienteException(m, monVu); //otro exception a actualizar
         } else if (m.getValor() == precio) {
-            int valorMoneda = m.getValor();
-            if (cual == COCA) {
-                producto = (Producto) coca.getElemento();
-                if (producto == null) {
-                    throw new NoHayProductoException(m, monVu);
+            producto = (Producto) temp.getElemento();
+            if (producto == null) {
+                int valorMoneda = m.getValor();
+                while (valorMoneda != 0) {
+                    monVu.addElemento(new Moneda100());
+                    valorMoneda -= 100;
                 }
-            } else if (cual == SPRITE) {
-                producto = (Producto) sprite.getElemento();
-                if (producto == null) {
-                    throw new NoHayProductoException(m, monVu);
-                }
-            } else if (cual == FANTA) {
-                producto = (Producto) fanta.getElemento();
-                if (producto == null) {
-                    throw new NoHayProductoException(m, monVu);
-                }
-            } else if (cual == SNICKERS) {
-                producto = (Producto) snickers.getElemento();
-                if (producto == null) {
-                    throw new NoHayProductoException(m, monVu);
-                }
-            } else if (cual == SUPER8) {
-                producto = (Producto) super8.getElemento();
-                if (producto == null) {
-                    throw new NoHayProductoException(m, monVu);
-                }
-            }
-            else {
-                throw new NoHayProductoException(m, monVu);
             }
         }
-
         return producto;
     }
 
