@@ -7,7 +7,6 @@ class Expendedor {
     private Deposito snickers;
     private Deposito super8;
     private Deposito monVu;
-    private static int precio; //
     public Expendedor(int numProductos) {
         coca = new Deposito(); sprite = new Deposito();
         fanta = new Deposito(); snickers = new Deposito();

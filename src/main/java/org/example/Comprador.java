@@ -6,8 +6,6 @@ class Comprador {
 
     public Comprador(Moneda m, int cualBebida, Expendedor exp) throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
         vuelto = 0;
-
-
             Producto producto = exp.comprarProducto(m, cualBebida);
 
             if (producto != null) {
