@@ -1,6 +1,6 @@
 package org.example;
 
-class Moneda500 extends Moneda {
+class Moneda500 extends Moneda implements Comparable<Moneda> {
     public Moneda500() {
         super();
     }
@@ -13,5 +13,8 @@ class Moneda500 extends Moneda {
         return "Moneda{" +
                 "serie = " + this +
                 "valor = 500}";
+    }
+    public int compareTo(Moneda500 o) {
+        return Integer.compare(this.getValor(), o.getValor());
     }
 }
