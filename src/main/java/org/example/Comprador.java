@@ -15,9 +15,7 @@ class Comprador {
                 }
             } else {
                 sonido = null;
-                while ((m = exp.getVuelto()) != null) {
-                    vuelto = vuelto + m.getValor();
-                }
+                vuelto= m.getValor();
 
             }
 

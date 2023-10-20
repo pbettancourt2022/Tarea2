@@ -6,65 +6,70 @@ public class Main {
         Expendedor exp = new Expendedor(2);
         Moneda m = null;
         Comprador c = null;
+        Moneda moneda;
 
         for (int i = 0; i < 3; i++) {
-            m = new Moneda1000();
+            moneda = new Moneda1000();
             try {
+                m= moneda;
                 c = new Comprador(m, Productos.COCACOLA.getNumero(), exp);
                 System.out.println(c.queBebiste() + " $" + c.cuantoVuelto());
             } catch (NoHayProductoException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
             } catch (PagoInsuficienteException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
             } catch (PagoIncorrectoException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         } for (int i = 0; i < 3; i++) {
-            m = new Moneda100();
+            moneda = new Moneda1000();
             try {
+                m= moneda;
                 c = new Comprador(m, Productos.SPRITE.getNumero(), exp);
                 System.out.println(c.queBebiste() + " $" + c.cuantoVuelto());
             } catch (NoHayProductoException e) {
-                System.out.println("Error: " + e.getMessage());
-                System.out.println("Vuelto: $" + c.cuantoVuelto());
+                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
             } catch (PagoInsuficienteException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
             } catch (PagoIncorrectoException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         } for (int i = 0; i < 3; i++) {
-            m = null;
+            moneda = null;
             try {
+                m= moneda;
                 c = new Comprador(m, Productos.FANTA.getNumero(), exp);
                 System.out.println(c.queBebiste() + " $" + c.cuantoVuelto());
             } catch (NoHayProductoException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
             } catch (PagoInsuficienteException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
             } catch (PagoIncorrectoException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         } for (int i = 0; i < 3; i++) {
-            m = new Moneda1000();
+            moneda = new Moneda1000();
             try {
+                m= moneda;
                 c = new Comprador(m, Productos.SNICKERS.getNumero(), exp);
                 System.out.println(c.queBebiste() + " $" + c.cuantoVuelto());
             } catch (NoHayProductoException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
             } catch (PagoInsuficienteException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
             } catch (PagoIncorrectoException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         } for (int i = 0; i < 3; i++) {
-            m = new Moneda1000();
+            moneda = new Moneda100();
             try {
+                m= moneda;
                 c = new Comprador(m, Productos.SUPER8.getNumero(), exp);
                 System.out.println(c.queBebiste() + " $" + c.cuantoVuelto());
             } catch (NoHayProductoException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
             } catch (PagoInsuficienteException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
             } catch (PagoIncorrectoException e) {
                 System.out.println("Error: " + e.getMessage());
             }
