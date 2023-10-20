@@ -1,7 +1,7 @@
 package org.example;
 
 class PagoIncorrectoException {
-    public PagoIncorrectoException(Moneda m, DepositoM monVu) {
-        monVu.addMoneda(m);
+    public PagoIncorrectoException(Moneda m, Deposito monVu) {
+        monVu.addElemento(m);
     }
 }

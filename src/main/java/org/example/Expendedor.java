@@ -4,7 +4,7 @@ class Expendedor {
     private final Deposito coca;
     private final Deposito sprite;
     private final Deposito fanta;
-    private final DepositoM monVu;
+    private final Deposito monVu;
     public static final int COCA = 1;
     public static final int SPRITE = 2;
     public static final int FANTA =3;
@@ -15,12 +15,12 @@ class Expendedor {
         coca = new Deposito();
         sprite = new Deposito();
         fanta = new Deposito();
-        monVu = new DepositoM();
+        monVu = new Deposito();
         precio = precioBebidas;
         for (int i = 0; i < numBebidas; i++) {
-            coca.addBebida(new CocaCola(i + 100));
-            sprite.addBebida(new Sprite(i + 200));
-            fanta.addBebida(new Fanta(i+300));
+            coca.addElemento(new CocaCola(i + 100));
+            sprite.addElemento(new Sprite(i + 200));
+            fanta.addElemento(new Fanta(i+300));
         }
 
     }
@@ -35,27 +35,27 @@ class Expendedor {
             int valorMoneda = m.getValor();
             int valorVuelto = m.getValor() - precio;
             if (cual == COCA) {
-                bebida = coca.getBebida();
+                bebida = (Bebida) coca.getElemento();
                 if (bebida == null) {
                     new NoHayProductoException(m, monVu);
                 } else {
                     while (valorVuelto != 0) {
-                        monVu.addMoneda(new Moneda100());
+                        monVu.addElemento(new Moneda100());
                         valorVuelto = valorVuelto - 100;
                     }
                     return bebida;
                 }
             } else if (cual == SPRITE) {
-                bebida = sprite.getBebida();
+                bebida = (Bebida) sprite.getElemento();
                 if (bebida == null) {
                     while (valorMoneda != 0) {
-                        monVu.addMoneda(new Moneda100());
+                        monVu.addElemento(new Moneda100());
                         valorMoneda = valorMoneda - 100;
                     }
                     return bebida;
                 } else {
                     while (valorVuelto != 0) {
-                        monVu.addMoneda(new Moneda100());
+                        monVu.addElemento(new Moneda100());
                         valorVuelto = valorVuelto - 100;
                     }
                     return bebida;
@@ -71,24 +71,24 @@ class Expendedor {
         } else if (m.getValor() == precio) {
             int valorMoneda = m.getValor();
             if (cual == COCA) {
-                bebida = coca.getBebida();
+                bebida = (Bebida) coca.getElemento();
                 if (bebida == null) {
                     while (valorMoneda != 0) {
-                        monVu.addMoneda(new Moneda100());
+                        monVu.addElemento(new Moneda100());
                         valorMoneda = valorMoneda - 100;
                     }
                 }
             } else if (cual == SPRITE) {
-                bebida = sprite.getBebida();
+                bebida = (Bebida) sprite.getElemento();
                 if (bebida == null) {
                     while (valorMoneda != 0) {
-                        monVu.addMoneda(new Moneda100());
+                        monVu.addElemento(new Moneda100());
                         valorMoneda = valorMoneda - 100;
                     }
                 }
             } else {
                 while (valorMoneda != 0) {
-                    monVu.addMoneda(new Moneda100());
+                    monVu.addElemento(new Moneda100());
                     valorMoneda = valorMoneda - 100;
                 }
                 return null;
@@ -99,6 +99,6 @@ class Expendedor {
     }
 
     public Moneda getVuelto() {
-        return monVu.getMoneda();
+        return (Moneda) monVu.getElemento();
     }
 }

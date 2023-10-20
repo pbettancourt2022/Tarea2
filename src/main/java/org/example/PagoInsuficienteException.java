@@ -1,8 +1,8 @@
 package org.example;
 
 class PagoInsuficienteException {
-    public PagoInsuficienteException(Moneda m, DepositoM monVu) {
-        monVu.addMoneda(m);
+    public PagoInsuficienteException(Moneda m, Deposito monVu) {
+        monVu.addElemento(m);
     }
 
 }
