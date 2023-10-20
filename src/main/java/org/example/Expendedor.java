@@ -7,19 +7,12 @@ class Expendedor {
     private Deposito snickers;
     private Deposito super8;
     private Deposito monVu;
-    public static final int COCA = 1;
-    public static final int SPRITE = 2;
-    public static final int FANTA =3;
-    public static final int SNICKERS = 4;
-    public static final int SUPER8 = 5;
-
-    private static int precio;
-
-    public Expendedor(int numProductos, int precioProductos) {
+    private int precio;
+    public Expendedor(int numProductos, int precio) {
         coca = new Deposito(); sprite = new Deposito();
         fanta = new Deposito(); snickers = new Deposito();
         super8 = new Deposito(); monVu = new Deposito();
-        precio = precioProductos;
+        this.precio = precio;
         for (int i = 0; i < numProductos; i++) {
             coca.addElemento(new CocaCola(i + 100));
             sprite.addElemento(new Sprite(i + 200));
@@ -30,8 +23,189 @@ class Expendedor {
 
     }
 
+
     public Producto comprarProducto(Moneda m, int cual) {
         Producto producto = null;
+/*
+        if(cual == Productos.COCACOLA.getNumero()){
+            if (m == null){
+                new PagoIncorrectoException(m, monVu);
+                return producto;
+            }
+            else if(m.getValor() > Productos.COCACOLA.getPrecio()){
+                int valorMoneda = m.getValor();
+                int valorVuelto = m.getValor() - Productos.COCACOLA.getPrecio();
+                if (cual == Productos.COCACOLA.getNumero()) {
+                    producto = (Producto) coca.getElemento();
+                    if (producto == null) {
+                        new NoHayProductoException(m, monVu);
+                        return null;
+                    } else {
+                        while (valorVuelto != 0) {
+                            monVu.addElemento(new Moneda100());
+                            valorVuelto = valorVuelto - 100;
+                        }
+                        return producto;
+                    }
+                }
+            } else if (m.getValor() < Productos.COCACOLA.getPrecio()) {
+                    new PagoInsuficienteException(m, monVu);
+                    return null;
+            } else if (m.getValor() == Productos.COCACOLA.getPrecio()) {
+                int valorMoneda = m.getValor();
+                producto = (Producto) coca.getElemento();
+                if (producto == null) {
+                    while (valorMoneda != 0) {
+                        monVu.addElemento(new Moneda100());
+                        valorMoneda = valorMoneda - 100;
+                    }
+                }
+        } else if(cual == Productos.SPRITE.getNumero()) {
+            if (m == null) {
+                new PagoIncorrectoException(m, monVu);
+                return producto;
+            } else if (m.getValor() > Productos.SPRITE.getPrecio()) {
+                int valorMoneda = m.getValor();
+                int valorVuelto = m.getValor() - Productos.SPRITE.getPrecio();
+                if (cual == Productos.SPRITE.getNumero()) {
+                    producto = (Producto) sprite.getElemento();
+                    if (producto == null) {
+                        while(valorMoneda != 0){
+                            monVu.addElemento(new Moneda100());
+                            valorMoneda = valorMoneda - 100;
+                        }
+                        return producto;
+                    } else {
+                        while (valorVuelto != 0) {
+                            monVu.addElemento(new Moneda100());
+                            valorVuelto = valorVuelto - 100;
+                        }
+                        return producto;
+                    }
+                }
+            } else if (m.getValor() < Productos.SPRITE.getPrecio()) {
+                new PagoInsuficienteException(m, monVu);
+                return null;
+            } else if (m.getValor() == Productos.SPRITE.getPrecio()) {
+                int valorMoneda = m.getValor();
+                producto = (Producto) sprite.getElemento();
+                if (producto == null) {
+                    while (valorMoneda != 0) {
+                        monVu.addElemento(new Moneda100());
+                        valorMoneda = valorMoneda - 100;
+                    }
+                }
+            }
+        } else if(cual == Productos.FANTA.getNumero()) {
+            if (m == null) {
+                new PagoIncorrectoException(m, monVu);
+                return producto;
+            } else if (m.getValor() > Productos.FANTA.getPrecio()) {
+                int valorMoneda = m.getValor();
+                int valorVuelto = m.getValor() - Productos.FANTA.getPrecio();
+                if (cual == Productos.FANTA.getNumero()) {
+                    producto = (Producto) fanta.getElemento();
+                    if (producto == null) {
+                        while(valorMoneda != 0){
+                            monVu.addElemento(new Moneda100());
+                            valorMoneda = valorMoneda - 100;
+                        }
+                        return producto;
+                    } else {
+                        while (valorVuelto != 0) {
+                            monVu.addElemento(new Moneda100());
+                            valorVuelto = valorVuelto - 100;
+                        }
+                        return producto;
+                    }
+                }
+            } else if (m.getValor() < Productos.FANTA.getPrecio()) {
+                new PagoInsuficienteException(m, monVu);
+                return null;
+            } else if (m.getValor() == Productos.FANTA.getPrecio()) {
+                int valorMoneda = m.getValor();
+                producto = (Producto) fanta.getElemento();
+                if (producto == null) {
+                    while (valorMoneda != 0) {
+                        monVu.addElemento(new Moneda100());
+                        valorMoneda = valorMoneda - 100;
+                    }
+                }
+            }
+        } else if(cual == Productos.SNICKERS.getNumero()) {
+            if (m == null) {
+                new PagoIncorrectoException(m, monVu);
+                return producto;
+            } else if (m.getValor() > Productos.SNICKERS.getPrecio()) {
+                int valorMoneda = m.getValor();
+                int valorVuelto = m.getValor() - Productos.SNICKERS.getPrecio();
+                if (cual == Productos.SNICKERS.getNumero()) {
+                    producto = (Producto) snickers.getElemento();
+                    if (producto == null) {
+                        while(valorMoneda != 0){
+                            monVu.addElemento(new Moneda100());
+                            valorMoneda = valorMoneda - 100;
+                        }
+                        return producto;
+                    } else {
+                        while (valorVuelto != 0) {
+                            monVu.addElemento(new Moneda100());
+                            valorVuelto = valorVuelto - 100;
+                        }
+                        return producto;
+                    }
+                }
+            } else if (m.getValor() < Productos.SNICKERS.getPrecio()) {
+                new PagoInsuficienteException(m, monVu);
+                return null;
+            } else if (m.getValor() == Productos.SNICKERS.getPrecio()) {
+                int valorMoneda = m.getValor();
+                producto = (Producto) snickers.getElemento();
+                if (producto == null) {
+                    while (valorMoneda != 0) {
+                        monVu.addElemento(new Moneda100());
+                        valorMoneda = valorMoneda - 100;
+                    }
+                }
+            }
+        } if(cual == Productos.SUPER8.getNumero()) {
+            if (m == null) {
+                new PagoIncorrectoException(m, monVu);
+                return producto;
+            } else if (m.getValor() > Productos.SUPER8.getPrecio()) {
+                int valorMoneda = m.getValor();
+                int valorVuelto = m.getValor() - Productos.SUPER8.getPrecio();
+                if (cual == Productos.SUPER8.getNumero()) {
+                    producto = (Producto) super8.getElemento();
+                    if (producto == null) {
+                        while(valorMoneda != 0){
+                            monVu.addElemento(new Moneda100());
+                            valorMoneda = valorMoneda - 100;
+                        }
+                        return producto;
+                    } else {
+                        while (valorVuelto != 0) {
+                            monVu.addElemento(new Moneda100());
+                            valorVuelto = valorVuelto - 100;
+                        }
+                        return producto;
+                    }
+                }
+            } else if (m.getValor() < Productos.SUPER8.getPrecio()) {
+                new PagoInsuficienteException(m, monVu);
+                return null;
+            } else if (m.getValor() == Productos.SUPER8.getPrecio()) {
+                int valorMoneda = m.getValor();
+                producto = (Producto) super8.getElemento();
+                if (producto == null) {
+                    while (valorMoneda != 0) {
+                        monVu.addElemento(new Moneda100());
+                        valorMoneda = valorMoneda - 100;
+                    }
+                }
+            }
+        }
+*/
 
         if (m == null) {
             new PagoIncorrectoException(m,monVu);
@@ -39,7 +213,7 @@ class Expendedor {
         } else if (m.getValor() > precio) {
             int valorMoneda = m.getValor();
             int valorVuelto = m.getValor() - precio;
-            if (cual == COCA) {
+            if (cual == Productos.COCACOLA.getNumero()) {
                 producto = (Producto) coca.getElemento();
                 if (producto == null) {
                     new NoHayProductoException(m, monVu);
@@ -51,7 +225,7 @@ class Expendedor {
                     }
                     return producto;
                 }
-            } else if (cual == SPRITE) {
+            } else if (cual == Productos.SPRITE.getNumero()) {
                 producto = (Producto) sprite.getElemento();
                 if (producto == null) {
                     while(valorMoneda != 0){
@@ -66,7 +240,7 @@ class Expendedor {
                     }
                     return producto;
                 }
-            } else if (cual == FANTA) {
+            } else if (cual == Productos.FANTA.getNumero()) {
                 producto = (Producto) fanta.getElemento();
                 if (producto == null) {
                     while(valorMoneda != 0){
@@ -81,7 +255,7 @@ class Expendedor {
                     }
                     return producto;
                 }
-            }else if (cual == SNICKERS) {
+            }else if (cual == Productos.SNICKERS.getNumero()) {
                 producto = (Producto) snickers.getElemento();
                 if (producto == null) {
                     while(valorMoneda != 0){
@@ -96,7 +270,7 @@ class Expendedor {
                     }
                     return producto;
                 }
-            } else if (cual == SUPER8) {
+            } else if (cual == Productos.SUPER8.getNumero()) {
                 producto = (Producto) super8.getElemento();
                 if (producto == null) {
                     while(valorMoneda != 0){
@@ -120,7 +294,7 @@ class Expendedor {
             return null;
         } else if (m.getValor() == precio) {
             int valorMoneda = m.getValor();
-            if (cual == COCA) {
+            if (cual == 1) {
                 producto = (Producto) coca.getElemento();
                 if (producto == null) {
                     while (valorMoneda != 0) {
@@ -128,7 +302,7 @@ class Expendedor {
                         valorMoneda = valorMoneda - 100;
                     }
                 }
-            } else if (cual == SPRITE) {
+            } else if (cual == 2) {
                 producto = (Producto) sprite.getElemento();
                 if (producto == null) {
                     while (valorMoneda != 0) {
@@ -136,7 +310,7 @@ class Expendedor {
                         valorMoneda = valorMoneda - 100;
                     }
                 }
-            } else if (cual == FANTA) {
+            } else if (cual == 3) {
                 producto = (Producto) fanta.getElemento();
                 if (producto == null) {
                     while (valorMoneda != 0) {
@@ -144,7 +318,7 @@ class Expendedor {
                         valorMoneda = valorMoneda - 100;
                     }
                 }
-            } else if (cual == SNICKERS) {
+            } else if (cual == 4) {
                 producto = (Producto) snickers.getElemento();
                 if (producto == null) {
                     while (valorMoneda != 0) {
@@ -152,7 +326,7 @@ class Expendedor {
                         valorMoneda = valorMoneda - 100;
                     }
                 }
-            } else if (cual == SUPER8) {
+            } else if (cual == 5) {
                 producto = (Producto) super8.getElemento();
                 if (producto == null) {
                     while (valorMoneda != 0) {
@@ -169,7 +343,6 @@ class Expendedor {
                 return null;
             }
         }
-
         return producto;
     }
 
