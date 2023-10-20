@@ -11,5 +11,10 @@ abstract class Moneda {
     }
 
     public abstract int getValor();
+    public String toString(){
+        return "Moneda{" +
+                "serie = " + this +
+                "valor = " + null;
+    }
 }
 

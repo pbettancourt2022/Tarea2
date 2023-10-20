@@ -10,10 +10,10 @@ class Comprador {
         if (m == null) {
             sonido = null;
         } else {
-            Bebida bebida = exp.comprarBebida(m, cualBebida);
+            Producto bebida = exp.comprarProducto(m, cualBebida);
 
             if (bebida != null) {
-                sonido = bebida.beber();
+                sonido = bebida.consumir();
                 while ((m = exp.getVuelto()) != null) {
                     vuelto = vuelto + m.getValor();
                 }

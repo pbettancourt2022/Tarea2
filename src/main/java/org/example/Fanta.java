@@ -6,7 +6,7 @@ class Fanta extends Bebida {
     }
 
     @Override
-    public String beber() {
+    public String consumir() {
         return "fanta";
     }
 

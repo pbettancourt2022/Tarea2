@@ -1,12 +1,12 @@
 package org.example;
 
-class Super8 extends Dulces {
+class Super8 extends Dulce {
     public Super8(int numSerie) {
         super(numSerie);
     }
 
     @Override
-    public String comer() {
+    public String consumir() {
         return "super 8";
     }
 

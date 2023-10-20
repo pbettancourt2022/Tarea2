@@ -11,7 +11,7 @@ abstract class Producto{
         return serie;
     }
 
-    public abstract String beber();
+    public abstract String consumir();
 
     public abstract String getTipo();
 }
