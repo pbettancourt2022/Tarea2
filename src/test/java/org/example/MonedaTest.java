@@ -35,6 +35,6 @@ class MonedaTest {
 
     @Test
     public void toStringMoneda() {
-        assertEquals("Moneda{serie = Moneda1000, valor = null}", moneda1000.toString());
+        assertEquals("Moneda{serie = Moneda1000, valor = 1000}", moneda1000.toString());
     }
 }

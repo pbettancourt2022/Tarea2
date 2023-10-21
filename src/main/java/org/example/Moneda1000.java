@@ -11,8 +11,8 @@ class Moneda1000 extends Moneda implements Comparable<Moneda> {
     }
     public String toString(){
         return "Moneda{" +
-                "serie = " + this +
-                "valor = 1000}";
+                "serie = " + getClass().getSimpleName() +
+                ", valor = 1000}";
     }
     public int compareTo(Moneda1000 o) {
         return Integer.compare(this.getValor(), o.getValor());
