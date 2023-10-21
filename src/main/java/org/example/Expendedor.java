@@ -1,12 +1,21 @@
 package org.example;
 
+/** Representa al expendedor en el escenario, matiene almecenes de los productos, de él se compran los Productos
+ * y de él se obtiene el vuelto
+ */
 class Expendedor {
+    /** todos los Depositos representan a un producto, mientras que el último representa al deposito de monedas de vuelto*/
     private Deposito coca;
     private Deposito sprite;
     private Deposito fanta;
     private Deposito snickers;
     private Deposito super8;
     private Deposito monVu;
+
+    /**
+     * Constructor de Expendedor, crea los depositos y llena los de los productos
+     * @param numProductos representa la cantidad de productos con la que se llenarán los Depositos
+     */
     public Expendedor(int numProductos) {
         coca = new Deposito(); sprite = new Deposito();
         fanta = new Deposito(); snickers = new Deposito();
@@ -21,11 +30,22 @@ class Expendedor {
 
     }
 
+    /**
+     * Método que representa la función de un expendedor, la cual es vender los productos
+     * @param m moneda con la que se compra
+     * @param cual producto que se desea
+     * @return devuelve el producto, o null en el caso de que no hayan o el pago sea inferior al precio
+     * @throws PagoIncorrectoException
+     * @throws NoHayProductoException
+     * @throws PagoInsuficienteException
+     */
     public Producto comprarProducto(Moneda m, int cual)throws PagoIncorrectoException, NoHayProductoException, PagoInsuficienteException  {
         Producto producto = null;
         Deposito temp = null;
         int precio = 0;
-
+        /**
+         * En este if statement se define cual es el producto seleccionado
+         */
         if (cual == Productos.COCACOLA.getNumero()) {
             temp = coca;
             precio = Productos.COCACOLA.getPrecio();
@@ -42,7 +62,7 @@ class Expendedor {
             temp = super8;
             precio = Productos.SUPER8.getPrecio();
         }
-
+        /** en este if se define el caso en que la moneda sea null*/
         if (m == null) {
             throw new PagoIncorrectoException(m, monVu); // la idea es poner el exception funcional aqui
         } else if (m.getValor() > precio) {
@@ -57,9 +77,13 @@ class Expendedor {
                     valorVuelto -= 100;
                 }
             }
-        } else if (m.getValor() < precio) {
+        }
+        /** en este se define el caso en que el valor de la moneda sea menor al precio*/
+        else if (m.getValor() < precio) {
             throw new PagoInsuficienteException(m, monVu); //otro exception a actualizar
-        } else if (m.getValor() == precio) {
+        }
+        /** en este se define el caso en que el valor de la moneda sea igual al precio*/
+        else if (m.getValor() == precio) {
             producto = (Producto) temp.getElemento();
             if (producto == null) {
                 int valorMoneda = m.getValor();
@@ -72,6 +96,9 @@ class Expendedor {
         return producto;
     }
 
+    /** Funciona similar a un Getter
+     * @return retorna de a una las monedas de 100 dentro de monVu
+     */
     public Moneda getVuelto() {
         return (Moneda) monVu.getElemento();
     }
